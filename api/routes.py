@@ -245,6 +245,7 @@ def get_doctor(
     tags=["Doctors"]
 )
 def list_specialties():
+     
     """
     List all available medical specialties.
 
