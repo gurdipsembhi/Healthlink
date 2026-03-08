@@ -2,8 +2,16 @@
 Configuration settings for HealthLink using Pydantic Settings.
 All settings loaded from environment variables with sensible defaults.
 """
+import os
+from pathlib import Path
 from typing import List
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+# Project root directory (parent of config/)
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+DATA_DIR = PROJECT_ROOT / "data"
+DATA_DIR.mkdir(exist_ok=True)
+DB_PATH = DATA_DIR / "healthlink.db"
 
 
 class Settings(BaseSettings):
@@ -36,7 +44,7 @@ class Settings(BaseSettings):
     chunk_overlap: int = 50
 
     # Database Configuration
-    database_url: str = "sqlite:///./data/healthlink.db"
+    database_url: str = f"sqlite:///{DB_PATH}"
     db_echo: bool = False
 
     # API Configuration
